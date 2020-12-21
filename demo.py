@@ -1,3 +1,30 @@
+# search function
+# first add complete matching recipes
+# then recipes with extra ingredients
+# TODO sort by how many extra ingredients are needed 
+#   (how much bigger the recipe set is than the input)
+def search(input, recipes):
+    result = set()
+    for (key, recipe) in recipes.items():
+        if input == recipe:
+            result.add(key)
+        if input.issubset(recipe):
+            result.add(key)
+
+    return result
+
+# filter function
+# add recipes that are subsets of input
+# TODO add recipes with intersections
+# filter amount of non intersections allowed
+# sort by number of intersections
+def filter(input, recipes):
+    result = set()
+    for (key, recipe) in recipes.items():
+        if input.issuperset(recipe):
+            result.add(key)
+    return result
+
 # Recipe List
 recipes = {
     'Old Fashioned': {'whiskey', 'simple', 'bitters'},
@@ -7,15 +34,12 @@ recipes = {
     'Sidecar': {'cognac', 'orange liqueur', 'lemon juice'}
 }
 
+# Test input
 input = {'whiskey', 'lemon juice'}
 
-# TODO filter function
-result = []
-for (key, value) in recipes.items():
-    if value.intersection(input):
-        result.append(key)
-
-print(result)
+print(search(input, recipes))
+input = {'whiskey', 'gin', 'lemon juice', 'simple'}
+print(filter(input, recipes))
 
 # Stream(?) filter
 # Sort stream
