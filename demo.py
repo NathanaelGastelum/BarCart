@@ -15,13 +15,16 @@ def search(input, recipes):
 
 # filter function
 # add recipes that are subsets of input
-# TODO add recipes with intersections
-# filter amount of non intersections allowed
+# add recipes with intersections
+# TODO add command line arguments for filter options
 # sort by number of intersections
-def filter(input, recipes):
+def filter(input, recipes, extraAllowance):
     result = set()
     for (key, recipe) in recipes.items():
         if input.issuperset(recipe):
+            result.add(key)
+        # filter amount of non intersections allowed
+        if recipe.__len__() - input.intersection(recipe).__len__() <= extraAllowance:
             result.add(key)
     return result
 
@@ -36,10 +39,10 @@ recipes = {
 
 # Test input
 input = {'whiskey', 'lemon juice'}
-
 print(search(input, recipes))
+
 input = {'whiskey', 'gin', 'lemon juice', 'simple'}
-print(filter(input, recipes))
+print(filter(input, recipes, 1))
 
 # Stream(?) filter
 # Sort stream
