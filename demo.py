@@ -28,23 +28,16 @@ def filter(input, recipes, extraAllowance):
             result.add(key)
     return result
 
-# Recipe List
-recipes = {
-    'Old Fashioned': {'whiskey', 'simple', 'bitters'},
-    'Gin Sour': {'gin', 'lemon juice', 'simple'},
-    'Whiskey Sour': {'whiskey', 'lemon juice', 'simple'},
-    'Hot Toddy': {'whiskey', 'lemon juice', 'honey', 'hot water', 'cinnamon stick'},
-    'Sidecar': {'cognac', 'orange liqueur', 'lemon juice'}
-}
-
-# Test input
-input = {'whiskey', 'lemon juice'}
-print(search(input, recipes))
-
-input = {'whiskey', 'gin', 'lemon juice', 'simple'}
-print(filter(input, recipes, 1))
+# Recipe Dictionary
+# recipes = {
+#     'Old Fashioned': {'whiskey', 'simple', 'bitters'},
+#     'Gin Sour': {'gin', 'lemon juice', 'simple'},
+#     'Whiskey Sour': {'whiskey', 'lemon juice', 'simple'},
+#     'Hot Toddy': {'whiskey', 'lemon juice', 'honey', 'hot water', 'cinnamon stick'},
+#     'Sidecar': {'cognac', 'orange liqueur', 'lemon juice'}
+# }
 
 # Stream(?) filter
 # Sort stream
-# Get full recipe text for selected recipe
-# Dictionary of ingrediencts so one ingredient can add multiple things (ex: lemons would also add lemon juice, lemon twist, lemon slice)
+# Get full recipe text for selected recipe (at to recipes shelve as a new dictionary)
+# Dictionary of ingrediencts so one ingredient can add multiple things to the inventory (ex: lemons would also add lemon juice, lemon twist, lemon slice)
