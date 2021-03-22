@@ -17,15 +17,17 @@ def search(input, recipes):
 # add recipes that are subsets of input
 # add recipes with intersections
 # TODO add command line arguments for filter options
-# sort by number of intersections
+# sort by number of intersections (sets are unsorted?)
 def filter(input, recipes, extraAllowance):
     result = set()
     for (key, recipe) in recipes.items():
         if input.issuperset(recipe):
             result.add(key)
-        # filter amount of non intersections allowed
-        if recipe.__len__() - input.intersection(recipe).__len__() <= extraAllowance:
-            result.add(key)
+    # filter amount of non intersections allowed
+    if extraAllowance > 0:
+        for (key, recipe) in recipes.items():
+            if recipe.__len__() - input.intersection(recipe).__len__() <= extraAllowance:
+                result.add(key)
     return result
 
 # Recipe Dictionary
