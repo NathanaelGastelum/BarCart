@@ -25,7 +25,7 @@ export default function RecordList() {
  // This method fetches the records from the database.
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`http://localhost:5000/record/`);
+     const response = await fetch(`http://localhost:5000/api/recipes/`);
  
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -65,7 +65,7 @@ export default function RecordList() {
    });
  }
  
- // This following section will display the table with the records of individuals.
+ // This following section will display the table with the list of recipes.
  return (
    <div>
      <h3>Record List</h3>

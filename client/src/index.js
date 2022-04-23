@@ -1,3 +1,4 @@
+// TODO: move dependencies from top end directory to backend?
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
