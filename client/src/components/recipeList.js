@@ -18,7 +18,8 @@ const Record = (props) => (
    </td>
  </tr>
 );
- 
+
+// TODO: turn into a MUI sorting table component
 export default function RecordList() {
  const [records, setRecords] = useState([]);
  
@@ -68,14 +69,11 @@ export default function RecordList() {
  // This following section will display the table with the list of recipes.
  return (
    <div>
-     <h3>Record List</h3>
+     <h3>Recipe List</h3>
      <table className="table table-striped" style={{ marginTop: 20 }}>
        <thead>
          <tr>
            <th>Name</th>
-           <th>Position</th>
-           <th>Level</th>
-           <th>Action</th>
          </tr>
        </thead>
        <tbody>{recordList()}</tbody>
