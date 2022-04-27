@@ -20,6 +20,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
+import RecipeDialog from "./recipeDialog";
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -282,6 +284,7 @@ export default function EnhancedTable() {
               <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                   rows.slice().sort(getComparator(order, orderBy)) */}
+              {/* TODO: Sort crashes on columns other than name, started after dialog implementation? */}
               {stableSort(recipes, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((recipe, index) => {
@@ -317,6 +320,16 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell align="left">{recipe.glass}</TableCell>
                       <TableCell align="left">{recipe.category}</TableCell>
+                      <TableCell>
+                          <RecipeDialog
+                            name={recipe.name}
+                            glass={recipe.glass}
+                            category={recipe.category}
+                            ingredients={recipe.ingredients}
+                            garnish={recipe.garnish}
+                            preparation={recipe.preparation}
+                          />
+                      </TableCell>
                       </TableRow>
                   );
                   })}
