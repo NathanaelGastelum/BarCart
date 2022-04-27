@@ -70,6 +70,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// TODO: Change navbar color
 export default function Navbar(props) {
   return (
     <React.Fragment>
@@ -92,7 +93,7 @@ export default function Navbar(props) {
                     component="div"
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                 >
-                    MUI
+                    Bar Cart
                 </Typography>
                 <Search>
                     <SearchIconWrapper>
