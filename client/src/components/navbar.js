@@ -70,13 +70,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// TODO: Change navbar color
 export default function Navbar(props) {
   return (
     <React.Fragment>
         <CssBaseline />
-        {/* TODO: fix navbar not sticking to the top of the window when scrolling*/}
         <ElevationScroll {...props}>
-            <AppBar position="static">
+            <AppBar>
                 <Toolbar>
                 <IconButton
                     size="large"
@@ -93,7 +93,7 @@ export default function Navbar(props) {
                     component="div"
                     sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                 >
-                    MUI
+                    Bar Cart
                 </Typography>
                 <Search>
                     <SearchIconWrapper>
@@ -108,18 +108,6 @@ export default function Navbar(props) {
             </AppBar>
         </ElevationScroll>
         <Toolbar />
-        <Container>
-            <Box sx={{ my: 2 }}>
-            {[...new Array(12)]
-                .map(
-                () => `Cras mattis consectetur purus sit amet fermentum.
-    Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-    Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-    Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-                )
-                .join('\n')}
-            </Box>
-        </Container>
     </React.Fragment>
   );
 }
