@@ -44,7 +44,7 @@ export default function ResponsiveDialog(props) {
             {props.category ? `Category: ${props.category}` : ""}<br/>
           </DialogContentText>
             <List>
-                {props.ingredients.map((ingredient, index) => 
+                {props.ingredients?.map((ingredient, index) => 
                     <ListItem key={index}>
                       <ListItemText
                           primary={ingredient.special ? ingredient.special : `${ingredient.amount} ${ingredient.unit} ${ingredient.ingredient}`}
