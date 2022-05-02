@@ -42,18 +42,20 @@ export default function ResponsiveDialog(props) {
           <DialogContentText>
             Glassware: {props.glass}<br/>
             {props.category ? `Category: ${props.category}` : ""}<br/>
+          </DialogContentText>
             <List>
-                {props.ingredients.map(ingredient => 
-                    <ListItem>
-                        <ListItemText
-                            primary={ingredient.special ? ingredient.special : `${ingredient.amount} ${ingredient.unit} ${ingredient.ingredient}`}
-                        />
+                {props.ingredients.map((ingredient, index) => 
+                    <ListItem key={index}>
+                      <ListItemText
+                          primary={ingredient.special ? ingredient.special : `${ingredient.amount} ${ingredient.unit} ${ingredient.ingredient}`}
+                      />
                     </ListItem>
                 )}
             </List>
-            {props.preparation}<br/>
-            {props.garnish ? `Garnish with ${props.garnish}` : ""} {/*TODO: figure out how to add line break here*/}
-          </DialogContentText>
+            <DialogContentText>
+              {props.preparation}<br/>
+              {props.garnish ? `Garnish with ${props.garnish}` : ""} {/*TODO: figure out how to add line break here*/}
+            </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
