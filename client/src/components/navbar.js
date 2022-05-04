@@ -76,7 +76,7 @@ export default function Navbar(props) {
     <React.Fragment>
         <CssBaseline />
         <ElevationScroll {...props}>
-            <AppBar>
+            <AppBar sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
                 <Toolbar>
                 <IconButton
                     size="large"
