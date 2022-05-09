@@ -132,6 +132,13 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
+  const [filters, setFilters] = useState([]);
+
+  const handleFilterChange = (filterId, value) => {
+    const newFilterState = Object.assign({}, filters, {[filterId]: value || undefined});
+    setFilters(newFilterState);
+  }
+
   return (
     <Toolbar
       sx={{
@@ -172,7 +179,10 @@ const EnhancedTableToolbar = (props) => {
       ) : (
         <Tooltip title="Filter list">
           <IconButton>
-            <RecipeFilter />
+            <RecipeFilter 
+              filters={filters}
+              onFilterChange={handleFilterChange}
+            /> {/* TODO: sort out the error cause by nested buttons */}
           </IconButton>
         </Tooltip>
       )}
