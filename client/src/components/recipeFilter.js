@@ -25,8 +25,8 @@ function ResponsiveDrawer(props) {
 
   const filters = [
     {id: 'name', title: 'Name', type: 'string'},
-    {id: 'spirit', title: 'Spirit', type: 'choice', choices: ['Whisk(e)y', 'Gin', 'Rum', 'Brandy']},
-    {id: 'color', title: 'Color', type: 'choice', choices: ['blue', 'orange']},
+    {id: 'spirit', title: 'Spirit', type: 'choice', choices: ['Whisk(e)y', 'Gin', 'Rum', 'Cognac']},
+    {id: 'glass', title: 'Glass', type: 'choice', choices: ['champagne-flute', 'coupe', 'highball', 'martini', 'margarita', 'old-fashioned', 'shot', 'wine']},
     {id: 'height', title: 'Height', type: 'choice', choices: ['tiny', 'small', 'big', 'huge']},
     {id: 'width', title: 'Width', type: 'choice', choices: ['tiny', 'small', 'big', 'huge']},
   ]
