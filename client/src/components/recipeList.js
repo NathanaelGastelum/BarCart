@@ -196,6 +196,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable() {
   const [recipes, setRecipes] = useState([]);
+  const [filters, setFilters] = useState(["gin", "campari", "vermouth"]); // TODO: remove hardcoded state after done testing
 
   // This method fetches the recipes from the database.
   useEffect(() => {
@@ -209,7 +210,8 @@ export default function EnhancedTable() {
         }
 
         const recipes = await response.json();
-        setRecipes(recipes);
+        // TODO: potentially optimize by changeing to sets?
+        setRecipes(recipes?.filter(recipe => recipe.ingredients?.every(ingredient => filters.includes(ingredient.ingredient?.toLowerCase()))));
     }
 
     getRecipes();
