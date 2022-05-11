@@ -193,7 +193,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable() {
   const [recipes, setRecipes] = useState([]);
-  const [filters, setFilters] = useState([]); // TODO: remove hardcoded state after done testing
+  const [filters, setFilters] = useState([]);
 
   // This method fetches the recipes from the database.
   useEffect(() => {
@@ -209,19 +209,20 @@ export default function EnhancedTable() {
         const recipes = await response.json();
         // TODO: potentially optimize by changeing to sets?
         filters.length > 0 ?
-        setRecipes(recipes?.filter(recipe => recipe.ingredients?.every(ingredient => filters.includes(ingredient.ingredient)))) :
+        // TODO: figure out why function doesn't re render on filter change
+        setRecipes(recipes?.filter(recipe => recipe.ingredients?.every(ingredient => filters.includes(ingredient.ingredient || ingredient.ingredient?.toLowerCase())))) :
         setRecipes(recipes);
     }
 
     getRecipes();
     
     return;
-  }, [recipes.length]);
+  }, [recipes.length, filters]);
 
   const handleFilterChange = (filterId, value) => {
     const newFilterState = [value];
     setFilters(newFilterState);
-  }
+  };
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');

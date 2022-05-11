@@ -13,7 +13,7 @@ function App() {
       <Navbar />
       <Routes>
        <Route exact path="/" element={<RecipeList />} />
-     </Routes>
+      </Routes>
     </div>
   );
 }
