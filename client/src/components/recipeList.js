@@ -132,11 +132,8 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  const [filters, setFilters] = useState([]);
-
   const handleFilterChange = (filterId, value) => {
-    const newFilterState = Object.assign({}, filters, {[filterId]: value || undefined});
-    setFilters(newFilterState);
+    props.onFilterChange(filterId, value);
   }
 
   return (
@@ -180,7 +177,7 @@ const EnhancedTableToolbar = (props) => {
         <Tooltip title="Filter list">
           <IconButton>
             <RecipeFilter 
-              filters={filters}
+              filters={props.filters}
               onFilterChange={handleFilterChange}
             /> {/* TODO: sort out the error cause by nested buttons */}
           </IconButton>
@@ -196,7 +193,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable() {
   const [recipes, setRecipes] = useState([]);
-  const [filters, setFilters] = useState(["gin", "campari", "vermouth"]); // TODO: remove hardcoded state after done testing
+  const [filters, setFilters] = useState([]); // TODO: remove hardcoded state after done testing
 
   // This method fetches the recipes from the database.
   useEffect(() => {
@@ -211,13 +208,20 @@ export default function EnhancedTable() {
 
         const recipes = await response.json();
         // TODO: potentially optimize by changeing to sets?
-        setRecipes(recipes?.filter(recipe => recipe.ingredients?.every(ingredient => filters.includes(ingredient.ingredient?.toLowerCase()))));
+        filters.length > 0 ?
+        setRecipes(recipes?.filter(recipe => recipe.ingredients?.every(ingredient => filters.includes(ingredient.ingredient)))) :
+        setRecipes(recipes);
     }
 
     getRecipes();
     
     return;
   }, [recipes.length]);
+
+  const handleFilterChange = (filterId, value) => {
+    const newFilterState = [value];
+    setFilters(newFilterState);
+  }
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
@@ -278,7 +282,11 @@ export default function EnhancedTable() {
   return (
       <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-          <EnhancedTableToolbar numSelected={selected.length} />
+          <EnhancedTableToolbar 
+            numSelected={selected.length}
+            filters={filters}
+            onFilterChange={handleFilterChange}
+             />
           <TableContainer>
           <Table
               sx={{ minWidth: 750 }}
