@@ -24,24 +24,21 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  // const handleChange = (event, value) => {
-  //   props.onFilterChange(value)
-  //   console.log("Filters: ", props.filters);
-  //   console.log(value);
-  // };
-
   function Tags() {
     const [selectedOptions, setSelectedOptions] = React.useState([]);
+
     const handleChange = (event, value) => {
       setSelectedOptions(value);
-      // console.log("Filters: ", props.filters);
-      // console.log(value);
     };
 
     const handleUpdate = () => {
-      props.onFilterChange(selectedOptions);
+      props.onFilterChange(props.filters?.concat(selectedOptions));
     };
-  
+
+    const handleDelete = () => {
+      props.onFilterChange([]);
+    };
+
     return (
       <Stack m={1}>
         <Autocomplete
@@ -70,6 +67,7 @@ function ResponsiveDrawer(props) {
           onChange={handleChange}
         />
         <Button onClick={handleUpdate}>Update Ingredients</Button>
+        <Button onClick={handleDelete}>Clear Ingredients</Button>
         <ChipsArray
           chipData={props.filters}
         />
