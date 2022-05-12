@@ -87,7 +87,7 @@ function EnhancedTableHead(props) {
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
-            color="primary"
+            color="secondary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
@@ -334,7 +334,7 @@ export default function EnhancedTable() {
                       >
                       <TableCell padding="checkbox">
                           <Checkbox
-                          color="primary"
+                          color="secondary"
                           checked={isItemSelected}
                           inputProps={{
                               'aria-labelledby': labelId,
@@ -378,7 +378,7 @@ export default function EnhancedTable() {
           </TableContainer>
           {/* TODO: change to infinite scroll with react-window */}
           <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10, 25, 100]}
           component="div"
           count={recipes.length}
           rowsPerPage={rowsPerPage}

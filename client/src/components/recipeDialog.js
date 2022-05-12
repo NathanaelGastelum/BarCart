@@ -26,7 +26,7 @@ export default function ResponsiveDialog(props) {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" color='secondary' onClick={handleClickOpen}>
         View Recipe
       </Button>
       <Dialog

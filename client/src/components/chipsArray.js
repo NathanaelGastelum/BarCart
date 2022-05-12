@@ -26,6 +26,7 @@ export default function ChipsArray(props) {
         return (
           <ListItem key={data}>
             <Chip
+              color='secondary'
               label={data}
             />
           </ListItem>

@@ -64,8 +64,8 @@ function ResponsiveDrawer(props) {
           )}
           onChange={handleChange}
         />
-        <Button onClick={handleUpdate}>Update Ingredients</Button>
-        <Button onClick={handleDelete}>Clear Ingredients</Button>
+        <Button color="secondary" onClick={handleUpdate}>Update Ingredients</Button>
+        <Button color="secondary" onClick={handleDelete}>Clear Ingredients</Button>
         <ChipsArray
           chipData={props.filters}
         />
