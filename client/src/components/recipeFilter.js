@@ -14,8 +14,6 @@ import Button from '@mui/material/Button';
 
 import ChipsArray from "./chipsArray";
 
-const drawerWidth = 240;
-
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -100,7 +98,7 @@ function ResponsiveDrawer(props) {
         <CssBaseline />
         <Box
             component="nav"
-            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            sx={{ width: { sm: props.drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="filter checkboxes"
         >
             {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -117,7 +115,7 @@ function ResponsiveDrawer(props) {
                 display: { xs: "block", sm: "none" },
                 "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
-                width: drawerWidth
+                width: props.drawerWidth
                 }
             }}
             >
@@ -130,7 +128,7 @@ function ResponsiveDrawer(props) {
                 display: { xs: "none", sm: "block" },
                 "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
-                width: drawerWidth
+                width: props.drawerWidth
                 }
             }}
             open

@@ -22,6 +22,8 @@ import { visuallyHidden } from '@mui/utils';
 import RecipeDialog from "./recipeDialog";
 import RecipeFilter from "./recipeFilter";
 
+const drawerWidth = 240;
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -179,6 +181,7 @@ const EnhancedTableToolbar = (props) => {
             <RecipeFilter 
               filters={props.filters}
               onFilterChange={handleFilterChange}
+              drawerWidth={drawerWidth}
             /> {/* TODO: sort out the error cause by nested buttons */}
           </IconButton>
       )}
@@ -234,7 +237,7 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState('name');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(100);
 
   const handleRequestSort = (event, property) => {
       const isAsc = orderBy === property && order === 'asc';
@@ -287,7 +290,9 @@ export default function EnhancedTable() {
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - recipes.length) : 0;
 
   return (
-      <Box sx={{ width: '100%' }}>
+      <Box component="main"
+        sx={{ flexGrow: 0, p: 0, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+      >
       <Paper sx={{ width: '100%', mb: 2 }}>
           <EnhancedTableToolbar 
             numSelected={selected.length}
@@ -296,7 +301,7 @@ export default function EnhancedTable() {
              />
           <TableContainer>
           <Table
-              sx={{ minWidth: 750 }}
+              sx={{ minWidth: 300 }}
               aria-labelledby="tableTitle"
               size='medium'
           >
