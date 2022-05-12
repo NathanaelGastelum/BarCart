@@ -20,7 +20,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
 
 import RecipeDialog from "./recipeDialog";
-import RecipeFilter from "./recipeFilter"
+import RecipeFilter from "./recipeFilter";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -132,8 +132,8 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  const handleFilterChange = (filterId, value) => {
-    props.onFilterChange(filterId, value);
+  const handleFilterChange = (value) => {
+    props.onFilterChange(value);
   }
 
   return (
@@ -174,14 +174,13 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
+        // <Tooltip> FIXME: needs "Filter list" title, but wouldn't go away while drawer was opened
           <IconButton>
             <RecipeFilter 
               filters={props.filters}
               onFilterChange={handleFilterChange}
             /> {/* TODO: sort out the error cause by nested buttons */}
           </IconButton>
-        </Tooltip>
       )}
     </Toolbar>
   );
@@ -208,9 +207,9 @@ export default function EnhancedTable() {
 
         const recipes = await response.json();
         // TODO: potentially optimize by changeing to sets?
-        filters.length > 0 ?
-        // TODO: figure out why function doesn't re render on filter change
-        setRecipes(recipes?.filter(recipe => recipe.ingredients?.every(ingredient => filters.includes(ingredient.ingredient || ingredient.ingredient?.toLowerCase())))) :
+        filters?.length > 0 ?
+        // TODO: change this to not be case sensitive
+        setRecipes(recipes?.filter(recipe => recipe.ingredients?.every(ingredient => filters.includes(ingredient.ingredient)))) :
         setRecipes(recipes);
     }
 
@@ -219,9 +218,9 @@ export default function EnhancedTable() {
     return;
   }, [recipes.length, filters]);
 
-  const handleFilterChange = (filterId, value) => {
-    const newFilterState = [value];
-    setFilters(newFilterState);
+  const handleFilterChange = (value) => {
+    const newFilterState = value;
+    setFilters(value);
   };
 
   const [order, setOrder] = React.useState('asc');

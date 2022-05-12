@@ -1,17 +1,18 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Toolbar from "@mui/material/Toolbar";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import { Typography } from "@mui/material";
+import Button from '@mui/material/Button';
+
+import ChipsArray from "./chipsArray";
 
 const drawerWidth = 240;
 
@@ -23,57 +24,63 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const filters = [
-    {id: 'name', title: 'Name', type: 'string'},
-    {id: 'spirit', title: 'Spirit', type: 'choice', choices: ['Whisk(e)y', 'Gin', 'Rum', 'Cognac']},
-    {id: 'glass', title: 'Glass', type: 'choice', choices: ['champagne-flute', 'coupe', 'highball', 'martini', 'margarita', 'old-fashioned', 'shot', 'wine']},
-    {id: 'height', title: 'Height', type: 'choice', choices: ['tiny', 'small', 'big', 'huge']},
-    {id: 'width', title: 'Width', type: 'choice', choices: ['tiny', 'small', 'big', 'huge']},
-  ]
+  // const handleChange = (event, value) => {
+  //   props.onFilterChange(value)
+  //   console.log("Filters: ", props.filters);
+  //   console.log(value);
+  // };
+
+  function Tags() {
+    const [selectedOptions, setSelectedOptions] = React.useState([]);
+    const handleChange = (event, value) => {
+      setSelectedOptions(value);
+      // console.log("Filters: ", props.filters);
+      // console.log(value);
+    };
+
+    const handleUpdate = () => {
+      props.onFilterChange(selectedOptions);
+    };
   
-  const filterComponents = {
-    string: ({filter, onChange, value}) => <input value={value || ''} onInput={(e) => onChange(filter.id, e.target.value)} />,
-    choice: ({filter, onChange, value}) => (
-      <select value={value || ''} onInput={(e) => onChange(filter.id, e.target.value)} size={1 + filter.choices.length}>
-        <option value="">(none)</option>
-        {filter.choices.map((c) => <option value={c} key={c}>{c}</option>)}
-       </select>
-     ),
-  };
-
-  function handleChange(filterId, value) {
-    props.onFilterChange(filterId, value);
-  }
-
-  const renderFilter = (f) => {
-    const Component = filterComponents[f.type];
     return (
-      <div key={f.id}>
-        <b>{f.title}</b>
-        <Component filter={f} value={props.filters[f.id]} onChange={handleChange} />
-      </div>
+      <Stack m={1}>
+        <Autocomplete
+          multiple
+          id="tags-filled"
+          options={[]}
+          defaultValue={[]}
+          freeSolo
+          renderTags={(value, getTagProps) =>
+            value.map((option, index) => (
+              <Chip
+                variant="outlined"
+                label={option}
+                {...getTagProps({ index })}
+              />
+            ))
+          }
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="standard"
+              label="Inventory"
+              placeholder="Ingredients"
+            />
+          )}
+          onChange={handleChange}
+        />
+        <Button onClick={handleUpdate}>Update Ingredients</Button>
+        <ChipsArray
+          chipData={props.filters}
+        />
+      </Stack>
     );
-  };
+  }
 
   const drawer = (
     <div>
       <Toolbar />
-        <Divider />
-        <List>
-          {filters.map(f => renderFilter(f))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        {JSON.stringify(props.filters)}
+      <Tags />
     </div>
   );
 
