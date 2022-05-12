@@ -218,8 +218,15 @@ export default function EnhancedTable() {
     return;
   }, [recipes.length, filters]);
 
+  useEffect(()=>{
+    setFilters(JSON.parse(localStorage.getItem('filters')));
+  },[]);
+
+  useEffect(()=>{
+    localStorage.setItem('filters', JSON.stringify(filters));
+  },[filters]);
+
   const handleFilterChange = (value) => {
-    const newFilterState = value;
     setFilters(value);
   };
 
@@ -304,7 +311,6 @@ export default function EnhancedTable() {
               <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                   rows.slice().sort(getComparator(order, orderBy)) */}
-              {/* TODO: Sort crashes on columns other than name, started after dialog implementation? */}
               {stableSort(recipes, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((recipe, index) => {
