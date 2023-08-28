@@ -47,7 +47,9 @@ export default function ResponsiveDialog(props) {
                 {props.ingredients?.map((ingredient, index) => 
                     <ListItem key={index}>
                       <ListItemText
-                          primary={ingredient.special ? ingredient.special : `${ingredient.amount} ${ingredient.unit} ${ingredient.ingredient}`}
+                          primary={ingredient.special ? 
+                            ingredient.special : 
+                            `${ingredient.amount} ${ingredient.unit} ${ingredient.label ? ingredient.label : ingredient.ingredient}`}
                       />
                     </ListItem>
                 )}
