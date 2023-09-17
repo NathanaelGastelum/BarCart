@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
 import RecipeList from "./components/recipeList";
+import Create from "./components/create"
 
 const theme = createTheme({
   palette: {
@@ -25,7 +26,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <Navbar />
         <Routes>
-        <Route exact path="/" element={<RecipeList />} />
+          <Route exact path="/" element={<RecipeList />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </ThemeProvider>
     </div>
