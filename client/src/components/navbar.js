@@ -22,7 +22,6 @@ function ElevationScroll(props) {
   });
 }
 
-// TODO: Change navbar color
 export default function Navbar(props) {
   return (
     <React.Fragment>
