@@ -13,7 +13,7 @@ const createRecipe = async (req, res) => {
     }
 
     const recipe = await Recipe.create({
-        text: req.body.text
+        text: req.body.text // TODO: change to accept recipe json instead of just text
     });
 
     res.json(recipe);
